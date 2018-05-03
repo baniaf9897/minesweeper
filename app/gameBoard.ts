@@ -1,25 +1,28 @@
 import {Field} from './field'
+
 export class GameBoard{
-    board
-    initializeBoard(){
-        this.board = create2DArray()
+    board:Field[]
+
+    initializeBoard(length:number){ 
+        this.board = create2DArray(length)
     }
-    distributeMines(){
-         for(let i = 0; i < 10; i++){
-             let x = Math.floor(Math.random() * 100) 
-             let y = Math.floor(Math.random() * 100) 
+    distributeMines(amountMines:number){
+        //distributes mines
+         for(let i = 0; i < amountMines; i++){
+             let x = Math.floor(Math.random() * this.board.length) 
+             let y = Math.floor(Math.random() * this.board.length) 
              this.board[x][y] = new Field(true)
-             console.log('x '+ x)
-             console.log('y '+ y)
-             console.log(this.board[2][4])
          }
     }
 }
-function create2DArray(){
-    let array = new Array(10)
-
-    for(let i = 0; i < 10; i ++ ){
-        array[i] = new Array(0,0,0,0,0,0,0,0,0,0)
+function create2DArray(length:number){
+    let array = new Array(length)
+    let row = new Array(length)
+    for(let i = 0; i < length; i++){
+        row[i] = new Field(false)
+    }
+    for(let i = 0; i < length; i ++ ){
+        array[i] = row
     }
     return array
 }

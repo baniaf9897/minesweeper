@@ -9,8 +9,10 @@ import {GameBoard} from './gameBoard'
 export class AppComponent{
      board = new GameBoard()
      
-     initializeGame(){
-        this.board.initializeBoard()
-        this.board.distributeMines()
-     }
+     startGame(){
+        this.board.initializeBoard(10)
+        this.board.distributeMines(10)
+        console.log(this.board.board)
+    
+    }
 }

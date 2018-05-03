@@ -14,9 +14,10 @@ var AppComponent = (function () {
     function AppComponent() {
         this.board = new gameBoard_1.GameBoard();
     }
-    AppComponent.prototype.initializeGame = function () {
-        this.board.initializeBoard();
-        this.board.distributeMines();
+    AppComponent.prototype.startGame = function () {
+        this.board.initializeBoard(10);
+        this.board.distributeMines(10);
+        console.log(this.board.board);
     };
     AppComponent = __decorate([
         core_1.Component({
