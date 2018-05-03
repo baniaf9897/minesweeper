@@ -7,12 +7,14 @@ import {GameBoard} from './gameBoard'
     templateUrl: "app/app.game.html"
 })
 export class AppComponent{
-     board = new GameBoard()
-     
+     board
+
      startGame(){
-        this.board.initializeBoard(10)
-        this.board.distributeMines(10)
+        this.board = new GameBoard(10)
+        this.board.distributeMines(10)    
         console.log(this.board.board)
-    
+    }
+    getGameArray(){
+        return this.board.board
     }
 }

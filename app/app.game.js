@@ -12,12 +12,14 @@ var core_1 = require("@angular/core");
 var gameBoard_1 = require('./gameBoard');
 var AppComponent = (function () {
     function AppComponent() {
-        this.board = new gameBoard_1.GameBoard();
     }
     AppComponent.prototype.startGame = function () {
-        this.board.initializeBoard(10);
+        this.board = new gameBoard_1.GameBoard(10);
         this.board.distributeMines(10);
         console.log(this.board.board);
+    };
+    AppComponent.prototype.getGameArray = function () {
+        return this.board.board;
     };
     AppComponent = __decorate([
         core_1.Component({
