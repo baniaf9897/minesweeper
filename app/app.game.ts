@@ -7,14 +7,22 @@ import {GameBoard} from './gameBoard'
     templateUrl: "app/app.game.html"
 })
 export class AppComponent{
-     board
+     gameBoard
 
      startGame(){
-        this.board = new GameBoard(10)
-        this.board.distributeMines(10)    
-        console.log(this.board.board)
+        this.gameBoard = new GameBoard(10)
+        this.gameBoard.distributeMines(10)    
+
+        console.log("HIER IST EIN FELD", this.gameBoard.board[1][1])
+        for(let i = 0; i < this.gameBoard.board.length; i ++){
+            let string = ""
+            for(let j = 0; j < this.gameBoard.board.length; j ++){
+                string = string + (String(this.gameBoard.board[i][j].value)) 
+            }
+            console.log(string)
+        }
     }
     getGameArray(){
-        return this.board.board
+        return this.gameBoard.board
     }
 }

@@ -14,12 +14,19 @@ var AppComponent = (function () {
     function AppComponent() {
     }
     AppComponent.prototype.startGame = function () {
-        this.board = new gameBoard_1.GameBoard(10);
-        this.board.distributeMines(10);
-        console.log(this.board.board);
+        this.gameBoard = new gameBoard_1.GameBoard(10);
+        this.gameBoard.distributeMines(10);
+        console.log("HIER IST EIN FELD", this.gameBoard.board[1][1]);
+        for (var i = 0; i < this.gameBoard.board.length; i++) {
+            var string = "";
+            for (var j = 0; j < this.gameBoard.board.length; j++) {
+                string = string + (String(this.gameBoard.board[i][j].value));
+            }
+            console.log(string);
+        }
     };
     AppComponent.prototype.getGameArray = function () {
-        return this.board.board;
+        return this.gameBoard.board;
     };
     AppComponent = __decorate([
         core_1.Component({

@@ -3,8 +3,9 @@ import { METHODS } from "http";
 
 export class Field {
     isMine:boolean
-    value:string
+    value
     constructor(isMine:boolean){
         this.isMine = isMine
+        this.value = 0
     }
 }
