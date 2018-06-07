@@ -1,83 +1,56 @@
 import {Field} from './field'
 
-export class GameBoard{
-    board
+module.exports = class GameBoard{
+    board:Field[]
+    length:number
 
     constructor(length){
-        this.board = create2DArray(length)
+       this.length = length
+       this.board = []
     }
-    distributeMines(amountMines:number){
-        let mineCoord = []
-
+    distributeMines(amountMines:number){       
         //distributes mines
-        for(var i = 0; i < amountMines; i++){
-             let x = Math.floor(Math.random() * 8) +1 
-             let y = Math.floor(Math.random() * 8) +1
-             let mine = new Field(true)
-             mine.value = 'X'
-             this.board[x][y] = mine
-             mineCoord.push([x,y])
+        for(let i = 0; i < amountMines; i++){
+             let x = Math.floor(Math.random() * 10) +1 
+             let y = Math.floor(Math.random() * 10) +1
+             if(checkIfFieldAlreadyExist(x,y,this.board)){
+                let mine = new Field(true,x,y)
+                mine.value = 'X'
+                this.board.push(mine)
+             }
         }
-
-         //value calulation
-        for(let i = 0; i < mineCoord.length; i++){
-            let tupl = mineCoord[i]
-            let x = tupl[0]
-            let y = tupl[1]
-            let neighbors = []
-
-            if(x !== 0){
-                let neighbor7 = this.board[x-1][y]
-                neighbors.push(neighbor7)
-                if(y !== 0){
-                    let neighbor6 = this.board[x-1][y-1]
-                    neighbors.push(neighbor6)
+        
+        //distribute fields
+        let filteredEl
+        for(let x = 1; x <= this.length; x++){
+            for(let y = 1; y <= this.length; y++){
+                if(checkIfFieldAlreadyExist(x,y,this.board)){
+                    let field = new Field(false,x,y)
+                    this.board.push(field)
                 }
-                if(y !== this.board.length){
-                    let neighbor8 = this.board[x-1][y+1]
-                    neighbors.push(neighbor8)
-                 }
-            }
-            if(x !== this.board.length){
-                let neighbor3 = this.board[x+1][y]
-                neighbors.push(neighbor3)
-                if(y !== this.board.length){
-                    let neighbor2 = this.board[x+1][y+1]
-                    neighbors.push(neighbor2)
-                }
-                if(y !== 0){
-                    let neighbor4 = this.board[x+1][y-1]
-                    neighbors.push(neighbor4)
-                }
-            }
-
-            if(y !== this.board.length){
-                let neighbor1 = this.board[x][y+1]
-                neighbors.push(neighbor1)
-            }
-            if(y !== 0){
-                let neighbor5 = this.board[x][y-1]
-                neighbors.push(neighbor5)
-            }
-            
-
-         //   neighbors.push(neighbor1,neighbor2,neighbor3,neighbor4,neighbor5,neighbor6,neighbor7,neighbor8)
-           
-            for(let i = 0; i < neighbors.length; i++){
-            if(!neighbors[i].isMine) neighbors[i].value = neighbors[i].value + 1
             }
         }
+    }
+    getLength(){
+        return this.length * this.length
     }
 }
-function create2DArray(length:number){
-    let array = new Array(length)
-    for(var i = 0; i < length; i ++ ){
-        array[i] = new Array(length)
-    }
-    for(var i = 0; i < length; i++){
-        for(var j = 0; j < length; j++){
-            array[i][j] = new Field(false)
+function checkIfFieldAlreadyExist(x,y,board){
+   let filteredEl =  board.find((el) =>{
+        return el.x === x && el.y === y
+    })
+    return filteredEl === undefined
+}
+
+function calculateValueOfFields(board,x,y){
+    //              
+    //     (x-1,y-1)    (x,y-1)     (x+1,y-1)
+    //     (x-1,y)      (x,y)       (x+1,y)
+    //     (x-1,y+1)    (x,y+1)     (x+1,y+1)
+    //
+    for(let x = 1; x <= this.board.length;x++){
+        for(let y =1; y <= this.board.length;y++){
+
         }
     }
-    return array
 }

@@ -9,21 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var gameBoard_1 = require('./gameBoard');
+var GameBoard = require('./gameBoard');
 var AppComponent = (function () {
     function AppComponent() {
     }
     AppComponent.prototype.startGame = function () {
-        this.gameBoard = new gameBoard_1.GameBoard(10);
+        this.gameBoard = new GameBoard(10);
         this.gameBoard.distributeMines(10);
-        console.log("HIER IST EIN FELD", this.gameBoard.board[1][1]);
+        var string = "";
+        console.log('Länge', this.gameBoard.board.length);
         for (var i = 0; i < this.gameBoard.board.length; i++) {
-            var string = "";
-            for (var j = 0; j < this.gameBoard.board.length; j++) {
-                string = string + (String(this.gameBoard.board[i][j].value));
-            }
-            console.log(string);
+            string = string + (String(this.gameBoard.board[i].x)) + "/" + (String(this.gameBoard.board[i].y)) + "  ";
         }
+        console.log(string);
     };
     AppComponent.prototype.getGameArray = function () {
         return this.gameBoard.board;

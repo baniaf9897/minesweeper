@@ -4,8 +4,12 @@ import { METHODS } from "http";
 export class Field {
     isMine:boolean
     value
-    constructor(isMine:boolean){
+    x
+    y
+    constructor(isMine:boolean, xCoordinate:number, yCoordinate:number ){
         this.isMine = isMine
         this.value = 0
+        this.x = xCoordinate
+        this.y = yCoordinate
     }
 }

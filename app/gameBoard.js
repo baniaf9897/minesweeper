@@ -1,77 +1,51 @@
 "use strict";
 var field_1 = require('./field');
-var GameBoard = (function () {
+module.exports = (function () {
     function GameBoard(length) {
-        this.board = create2DArray(length);
+        this.length = length;
+        this.board = [];
     }
     GameBoard.prototype.distributeMines = function (amountMines) {
-        var mineCoord = [];
         //distributes mines
         for (var i = 0; i < amountMines; i++) {
-            var x = Math.floor(Math.random() * 8) + 1;
-            var y = Math.floor(Math.random() * 8) + 1;
-            var mine = new field_1.Field(true);
-            mine.value = 'X';
-            this.board[x][y] = mine;
-            mineCoord.push([x, y]);
+            var x = Math.floor(Math.random() * 10) + 1;
+            var y = Math.floor(Math.random() * 10) + 1;
+            if (checkIfFieldAlreadyExist(x, y, this.board)) {
+                var mine = new field_1.Field(true, x, y);
+                mine.value = 'X';
+                this.board.push(mine);
+            }
         }
-        //value calulation
-        for (var i_1 = 0; i_1 < mineCoord.length; i_1++) {
-            var tupl = mineCoord[i_1];
-            var x = tupl[0];
-            var y = tupl[1];
-            var neighbors = [];
-            if (x !== 0) {
-                var neighbor7 = this.board[x - 1][y];
-                neighbors.push(neighbor7);
-                if (y !== 0) {
-                    var neighbor6 = this.board[x - 1][y - 1];
-                    neighbors.push(neighbor6);
+        //distribute fields
+        var filteredEl;
+        for (var x = 1; x <= this.length; x++) {
+            for (var y = 1; y <= this.length; y++) {
+                if (checkIfFieldAlreadyExist(x, y, this.board)) {
+                    var field = new field_1.Field(false, x, y);
+                    this.board.push(field);
                 }
-                if (y !== this.board.length) {
-                    var neighbor8 = this.board[x - 1][y + 1];
-                    neighbors.push(neighbor8);
-                }
-            }
-            if (x !== this.board.length) {
-                var neighbor3 = this.board[x + 1][y];
-                neighbors.push(neighbor3);
-                if (y !== this.board.length) {
-                    var neighbor2 = this.board[x + 1][y + 1];
-                    neighbors.push(neighbor2);
-                }
-                if (y !== 0) {
-                    var neighbor4 = this.board[x + 1][y - 1];
-                    neighbors.push(neighbor4);
-                }
-            }
-            if (y !== this.board.length) {
-                var neighbor1 = this.board[x][y + 1];
-                neighbors.push(neighbor1);
-            }
-            if (y !== 0) {
-                var neighbor5 = this.board[x][y - 1];
-                neighbors.push(neighbor5);
-            }
-            //   neighbors.push(neighbor1,neighbor2,neighbor3,neighbor4,neighbor5,neighbor6,neighbor7,neighbor8)
-            for (var i_2 = 0; i_2 < neighbors.length; i_2++) {
-                if (!neighbors[i_2].isMine)
-                    neighbors[i_2].value = neighbors[i_2].value + 1;
             }
         }
     };
+    GameBoard.prototype.getLength = function () {
+        return this.length * this.length;
+    };
     return GameBoard;
 }());
-exports.GameBoard = GameBoard;
-function create2DArray(length) {
-    var array = new Array(length);
-    for (var i = 0; i < length; i++) {
-        array[i] = new Array(length);
-    }
-    for (var i = 0; i < length; i++) {
-        for (var j = 0; j < length; j++) {
-            array[i][j] = new field_1.Field(false);
+function checkIfFieldAlreadyExist(x, y, board) {
+    var filteredEl = board.find(function (el) {
+        return el.x === x && el.y === y;
+    });
+    return filteredEl === undefined;
+}
+function calculateValueOfFields(board, x, y) {
+    //              
+    //     (x-1,y-1)    (x,y-1)     (x+1,y-1)
+    //     (x-1,y)      (x,y)       (x+1,y)
+    //     (x-1,y+1)    (x,y+1)     (x+1,y+1)
+    //
+    for (var x_1 = 1; x_1 <= this.board.length; x_1++) {
+        for (var y_1 = 1; y_1 <= this.board.length; y_1++) {
         }
     }
-    return array;
 }
