@@ -1,17 +1,9 @@
-jest.mock('../gameBoard')
-const GameBoard  =  require('./gameBoard')
-const game = jest.fn()
-GameBoard.mockImplementation(() =>{
-    return{
-        gameBoard: game
-    }
-})
+import {GameBoard} from '../gameBoard'
 
-const gameBoard = new GameBoard(10)
-gameBoard.getLength()
 
 
 describe('basic unit test of gameBoard',()=>{
+    let gameBoard 
     beforeEach(() => {
         gameBoard = new gameBoard(10) 
     })

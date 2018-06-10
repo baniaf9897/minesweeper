@@ -1,6 +1,5 @@
 import {Component} from "@angular/core"
-import { METHODS } from "http";
-const GameBoard  =  require('./gameBoard')
+import {GameBoard} from "./gameBoard"
 
 @Component({
     selector: "minesweeper",
@@ -16,7 +15,7 @@ export class AppComponent{
         console.log('Länge',this.gameBoard.board.length)
      
         for(let i = 0; i < this.gameBoard.board.length; i ++){ 
-                 string = string + (String(this.gameBoard.board[i].x)) +"/"+(String(this.gameBoard.board[i].y)) + "  "
+                 string = string + (String(this.gameBoard.board[i].x)) +"/"+(String(this.gameBoard.board[i].y))+"/"+(String(this.gameBoard.board[i].value)) + "  "
         }
         
         console.log(string)

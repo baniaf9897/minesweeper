@@ -1,6 +1,6 @@
 import {Field} from './field'
 
-module.exports = class GameBoard{
+ export class GameBoard{
     board:Field[]
     length:number
 
@@ -21,7 +21,6 @@ module.exports = class GameBoard{
         }
         
         //distribute fields
-        let filteredEl
         for(let x = 1; x <= this.length; x++){
             for(let y = 1; y <= this.length; y++){
                 if(checkIfFieldAlreadyExist(x,y,this.board)){
@@ -30,11 +29,13 @@ module.exports = class GameBoard{
                 }
             }
         }
+        calculateValueOfFields(this.board)
     }
     getLength(){
         return this.length * this.length
     }
 }
+
 function checkIfFieldAlreadyExist(x,y,board){
    let filteredEl =  board.find((el) =>{
         return el.x === x && el.y === y
@@ -42,15 +43,58 @@ function checkIfFieldAlreadyExist(x,y,board){
     return filteredEl === undefined
 }
 
-function calculateValueOfFields(board,x,y){
+function calculateValueOfFields(board){
     //              
     //     (x-1,y-1)    (x,y-1)     (x+1,y-1)
-    //     (x-1,y)      (x,y)       (x+1,y)
+    //     (x-1,y)      (x,y)MINE       (x+1,y)
     //     (x-1,y+1)    (x,y+1)     (x+1,y+1)
     //
-    for(let x = 1; x <= this.board.length;x++){
-        for(let y =1; y <= this.board.length;y++){
+    let field :Field
+    
+    let minesArray = board.filter((el) => {
+        el.isMine === true
+    })
 
+    let fieldArray = new Array()
+
+    minesArray.forEach(mine => {
+        field = board.find((el) =>{
+            el.x === (mine.x + 1) && el.y === mine.y
+        })
+        fieldArray.push(field)
+        field = this.board.find((el) =>{
+            el.x === (mine.x - 1) && el.y === mine.y
+        })
+        fieldArray.push(field)
+        field = this.board.find((el) =>{
+            el.x === (mine.x - 1) && el.y === (mine.y - 1)
+        })
+        fieldArray.push(field)
+        field = this.board.find((el) =>{
+            el.x === mine.x && el.y === (mine.y - 1)
+        }) 
+        fieldArray.push(field)
+        field = this.board.find((el) =>{
+            el.x === (mine.x + 1) && el.y === (mine.y - 1)
+        })
+        fieldArray.push(field)
+        field = this.board.find((el) =>{
+            el.x === (mine.x - 1) && el.y === (mine.y + 1)
+        }) 
+        fieldArray.push(field)
+        field = this.board.find((el) =>{
+            el.x === mine.x  && el.y === (mine.y + 1)
+        })
+        fieldArray.push(field)
+        field = this.board.find((el) =>{
+            el.x === (mine.x + 1) && el.y === (mine.y + 1)
+        })
+        fieldArray.push(field)
+    })
+
+    fieldArray.forEach(mine =>{
+        if(mine !== undefined){
+            mine.value = mine.value + 1
         }
-    }
+    })
 }

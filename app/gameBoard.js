@@ -1,6 +1,6 @@
 "use strict";
 var field_1 = require('./field');
-module.exports = (function () {
+var GameBoard = (function () {
     function GameBoard(length) {
         this.length = length;
         this.board = [];
@@ -17,7 +17,6 @@ module.exports = (function () {
             }
         }
         //distribute fields
-        var filteredEl;
         for (var x = 1; x <= this.length; x++) {
             for (var y = 1; y <= this.length; y++) {
                 if (checkIfFieldAlreadyExist(x, y, this.board)) {
@@ -26,26 +25,69 @@ module.exports = (function () {
                 }
             }
         }
+        calculateValueOfFields(this.board);
     };
     GameBoard.prototype.getLength = function () {
         return this.length * this.length;
     };
     return GameBoard;
 }());
+exports.GameBoard = GameBoard;
 function checkIfFieldAlreadyExist(x, y, board) {
     var filteredEl = board.find(function (el) {
         return el.x === x && el.y === y;
     });
     return filteredEl === undefined;
 }
-function calculateValueOfFields(board, x, y) {
+function calculateValueOfFields(board) {
+    var _this = this;
     //              
     //     (x-1,y-1)    (x,y-1)     (x+1,y-1)
-    //     (x-1,y)      (x,y)       (x+1,y)
+    //     (x-1,y)      (x,y)MINE       (x+1,y)
     //     (x-1,y+1)    (x,y+1)     (x+1,y+1)
     //
-    for (var x_1 = 1; x_1 <= this.board.length; x_1++) {
-        for (var y_1 = 1; y_1 <= this.board.length; y_1++) {
+    var field;
+    var minesArray = board.filter(function (el) {
+        el.isMine === true;
+    });
+    var fieldArray = new Array();
+    minesArray.forEach(function (mine) {
+        field = board.find(function (el) {
+            el.x === (mine.x + 1) && el.y === mine.y;
+        });
+        fieldArray.push(field);
+        field = _this.board.find(function (el) {
+            el.x === (mine.x - 1) && el.y === mine.y;
+        });
+        fieldArray.push(field);
+        field = _this.board.find(function (el) {
+            el.x === (mine.x - 1) && el.y === (mine.y - 1);
+        });
+        fieldArray.push(field);
+        field = _this.board.find(function (el) {
+            el.x === mine.x && el.y === (mine.y - 1);
+        });
+        fieldArray.push(field);
+        field = _this.board.find(function (el) {
+            el.x === (mine.x + 1) && el.y === (mine.y - 1);
+        });
+        fieldArray.push(field);
+        field = _this.board.find(function (el) {
+            el.x === (mine.x - 1) && el.y === (mine.y + 1);
+        });
+        fieldArray.push(field);
+        field = _this.board.find(function (el) {
+            el.x === mine.x && el.y === (mine.y + 1);
+        });
+        fieldArray.push(field);
+        field = _this.board.find(function (el) {
+            el.x === (mine.x + 1) && el.y === (mine.y + 1);
+        });
+        fieldArray.push(field);
+    });
+    fieldArray.forEach(function (mine) {
+        if (mine !== undefined) {
+            mine.value = mine.value + 1;
         }
-    }
+    });
 }
