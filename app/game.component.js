@@ -16,10 +16,11 @@ var AppComponent = (function () {
     AppComponent.prototype.startGame = function () {
         this.gameBoard = new gameBoard_1.GameBoard(10);
         this.gameBoard.distributeMines(10);
+        //Output
         var string = "";
         console.log('Länge', this.gameBoard.board.length);
         for (var i = 0; i < this.gameBoard.board.length; i++) {
-            string = string + (String(this.gameBoard.board[i].x)) + "/" + (String(this.gameBoard.board[i].y)) + "/" + (String(this.gameBoard.board[i].value)) + "  ";
+            string = string + (String(this.gameBoard.board[i].x)) + "/" + (String(this.gameBoard.board[i].y)) + "/" + (String(this.gameBoard.board[i].value)) + "   ";
         }
         console.log(string);
     };
@@ -29,7 +30,7 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: "minesweeper",
-            templateUrl: "app/app.game.html"
+            templateUrl: "app/game.component.html"
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
