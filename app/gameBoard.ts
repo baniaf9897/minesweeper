@@ -44,16 +44,12 @@ import {Field} from './field'
             neighbors.push(fields.find(el =>  el.x === mine.x  && el.y === (mine.y + 1)))
             neighbors.push(fields.find(el =>  el.x === (mine.x + 1) && el.y === (mine.y + 1)))
         })
-
         neighbors.forEach(el => {
-           if(this.board.includes(el)){
-           this.board[this.board.indexOf(el)].value ++
-        }
-         })
-         
-
+            if(this.board.includes(el)){
+                this.board[this.board.indexOf(el)].value ++
+            }
+        })
     }
-
     getLength(){
         return this.length * this.length
     }

@@ -9,22 +9,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var platform_browser_1 = require("@angular/platform-browser");
-var forms_1 = require("@angular/forms");
-var game_component_1 = require("./game.component");
-var tile_component_1 = require("./tile/tile.component");
-var row_component_1 = require("./row/row.component");
-var AppModule = (function () {
-    function AppModule() {
+var Row = (function () {
+    function Row() {
     }
-    AppModule = __decorate([
-        core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, forms_1.FormsModule],
-            declarations: [game_component_1.AppComponent, tile_component_1.Tile, row_component_1.Row],
-            bootstrap: [game_component_1.AppComponent]
+    Row = __decorate([
+        core_1.Component({
+            selector: "row",
+            templateUrl: "./row.component.html"
         }), 
         __metadata('design:paramtypes', [])
-    ], AppModule);
-    return AppModule;
+    ], Row);
+    return Row;
 }());
-exports.AppModule = AppModule;
+exports.Row = Row;

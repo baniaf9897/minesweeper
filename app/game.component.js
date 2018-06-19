@@ -13,19 +13,19 @@ var gameBoard_1 = require("./gameBoard");
 var AppComponent = (function () {
     function AppComponent() {
     }
-    AppComponent.prototype.startGame = function () {
+    AppComponent.prototype.ngOnInit = function () {
         this.gameBoard = new gameBoard_1.GameBoard(10);
         this.gameBoard.distributeMines(20);
+    };
+    AppComponent.prototype.startGame = function () {
         //Output
+        this.gameBoard = new gameBoard_1.GameBoard(10);
+        this.gameBoard.distributeMines(20);
         var string = "";
-        console.log('Länge', this.gameBoard.board.length);
         for (var i = 0; i < this.gameBoard.board.length; i++) {
             string = string + (String(this.gameBoard.board[i].x)) + "/" + (String(this.gameBoard.board[i].y)) + "/" + (String(this.gameBoard.board[i].value)) + "   ";
         }
         console.log(string);
-    };
-    AppComponent.prototype.getGameArray = function () {
-        return this.gameBoard.board;
     };
     AppComponent = __decorate([
         core_1.Component({

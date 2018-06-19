@@ -5,6 +5,7 @@ var Field = (function () {
         this.value = 0;
         this.x = xCoordinate;
         this.y = yCoordinate;
+        this.isRevealed = false;
     }
     return Field;
 }());
