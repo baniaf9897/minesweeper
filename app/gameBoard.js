@@ -41,7 +41,9 @@ var GameBoard = (function () {
             neighbors.push(fields.find(function (el) { return el.x === (mine.x + 1) && el.y === (mine.y + 1); }));
         });
         neighbors.forEach(function (el) {
-            _this.board.map(function (el) { return el.value++; });
+            if (_this.board.includes(el)) {
+                _this.board[_this.board.indexOf(el)].value++;
+            }
         });
     };
     GameBoard.prototype.getLength = function () {

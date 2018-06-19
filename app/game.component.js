@@ -15,7 +15,7 @@ var AppComponent = (function () {
     }
     AppComponent.prototype.startGame = function () {
         this.gameBoard = new gameBoard_1.GameBoard(10);
-        this.gameBoard.distributeMines(10);
+        this.gameBoard.distributeMines(20);
         //Output
         var string = "";
         console.log('Länge', this.gameBoard.board.length);

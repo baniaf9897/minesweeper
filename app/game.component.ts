@@ -10,7 +10,7 @@ export class AppComponent{
 
      startGame(){
         this.gameBoard = new GameBoard(10)
-        this.gameBoard.distributeMines(10)    
+        this.gameBoard.distributeMines(20)    
         
         //Output
         let string = ""

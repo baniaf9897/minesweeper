@@ -46,9 +46,12 @@ import {Field} from './field'
         })
 
         neighbors.forEach(el => {
-           this.board.map(el => el.value++)
-        })
-        
+           if(this.board.includes(el)){
+           this.board[this.board.indexOf(el)].value ++
+        }
+         })
+         
+
     }
 
     getLength(){
