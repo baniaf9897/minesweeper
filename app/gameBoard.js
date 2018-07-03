@@ -27,7 +27,6 @@ var GameBoard = (function () {
                 }
             }
         }
-        //  calculateValueOfFields(this.board)
         var mines = this.board.filter(function (el) { return el.isMine === true; });
         var fields = this.board.filter(function (el) { return el.isMine === false; });
         var neighbors = new Array();
@@ -45,9 +44,13 @@ var GameBoard = (function () {
                 _this.board[_this.board.indexOf(el)].value++;
             }
         });
+        // sort array
+        this.board.sort(function (a, b) {
+            return (_this.length * a.y + a.x) - (_this.length * b.y + b.x);
+        });
     };
     GameBoard.prototype.getLength = function () {
-        return this.length * this.length;
+        return this.length;
     };
     return GameBoard;
 }());

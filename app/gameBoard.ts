@@ -29,7 +29,6 @@ import {Field} from './field'
                 }
             }
         }
-      //  calculateValueOfFields(this.board)
 
         let mines = this.board.filter( el => el.isMine === true) 
         let fields = this.board.filter( el => el.isMine === false)
@@ -49,15 +48,23 @@ import {Field} from './field'
                 this.board[this.board.indexOf(el)].value ++
             }
         })
+
+        // sort array
+        this.board.sort((a,b) => {
+            return (this.length * a.y + a.x) - (this.length * b.y + b.x)
+    
+        })
     }
     getLength(){
-        return this.length * this.length
+        return this.length
     }
 }
-
 function checkIfFieldAlreadyExist(x,y,board){
    let filteredEl =  board.find(el =>
          el.x === x && el.y === y
     )
     return filteredEl === undefined
 }
+
+
+

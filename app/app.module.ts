@@ -7,7 +7,7 @@ import { Row } from "./row/row.component";
 
 @NgModule({
     imports: [BrowserModule, FormsModule],
-    declarations: [AppComponent,Tile,Row],
+    declarations: [AppComponent],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

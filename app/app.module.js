@@ -12,15 +12,13 @@ var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var game_component_1 = require("./game.component");
-var tile_component_1 = require("./tile/tile.component");
-var row_component_1 = require("./row/row.component");
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule],
-            declarations: [game_component_1.AppComponent, tile_component_1.Tile, row_component_1.Row],
+            declarations: [game_component_1.AppComponent],
             bootstrap: [game_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

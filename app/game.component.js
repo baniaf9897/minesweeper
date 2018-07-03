@@ -16,6 +16,9 @@ var AppComponent = (function () {
     AppComponent.prototype.ngOnInit = function () {
         this.gameBoard = new gameBoard_1.GameBoard(10);
         this.gameBoard.distributeMines(20);
+        this.rows = new Array(this.gameBoard.getLength());
+        for (var i = 0; i < this.gameBoard.getLength(); i++) {
+        }
     };
     AppComponent.prototype.startGame = function () {
         //Output
