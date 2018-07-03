@@ -9,15 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var tile_component_1 = require("../tile/tile.component");
 var Row = (function () {
-    function Row() {
+    function Row(tiles) {
+        this.row = new Array(tiles.length);
+        tiles.map(function (_tile) {
+            _tile = new tile_component_1.Tile(_tile);
+        });
+        this.row = tiles;
     }
     Row = __decorate([
         core_1.Component({
             selector: "row",
             templateUrl: "./row.component.html"
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [Array])
     ], Row);
     return Row;
 }());

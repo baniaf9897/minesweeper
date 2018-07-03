@@ -9,15 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var field_model_1 = require("../models/field.model");
 var Tile = (function () {
-    function Tile() {
+    function Tile(field) {
+        this.tile = field;
     }
     Tile = __decorate([
         core_1.Component({
             selector: "tile",
             templateUrl: "./tile.component.html"
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [field_model_1.Field])
     ], Tile);
     return Tile;
 }());

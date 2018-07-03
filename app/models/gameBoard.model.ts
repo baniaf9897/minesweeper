@@ -1,4 +1,4 @@
-import {Field} from './field'
+import {Field} from './field.model'
 
  export class GameBoard{
     board:Field[]
@@ -57,6 +57,11 @@ import {Field} from './field'
     }
     getLength(){
         return this.length
+    }
+    getAllFieldsOfARow(i: number) :Array<Field>{
+        return this.board.filter((field) => {
+            return field.y === i
+        })
     }
 }
 function checkIfFieldAlreadyExist(x,y,board){

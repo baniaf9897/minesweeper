@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { Field } from "../field";
+import { Field } from "../models/field.model";
 
 @Component({
     selector: "tile",
@@ -7,4 +7,8 @@ import { Field } from "../field";
 })
 export class Tile{
     tile:Field
+
+    constructor(field: Field){
+        this.tile = field
+    }
 }

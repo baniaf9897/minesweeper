@@ -9,21 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var gameBoard_1 = require("./gameBoard");
+var gameBoard_model_1 = require("./models/gameBoard.model");
+var row_component_1 = require("./row/row.component");
 var AppComponent = (function () {
     function AppComponent() {
     }
     AppComponent.prototype.ngOnInit = function () {
-        this.gameBoard = new gameBoard_1.GameBoard(10);
-        this.gameBoard.distributeMines(20);
-        this.rows = new Array(this.gameBoard.getLength());
-        for (var i = 0; i < this.gameBoard.getLength(); i++) {
-        }
+        this.startGame();
     };
     AppComponent.prototype.startGame = function () {
         //Output
-        this.gameBoard = new gameBoard_1.GameBoard(10);
+        this.gameBoard = new gameBoard_model_1.GameBoard(10);
         this.gameBoard.distributeMines(20);
+        this.rows = new Array(this.gameBoard.getLength());
+        for (var i = 1; i <= this.gameBoard.getLength(); i++) {
+            this.rows[i - 1] = new row_component_1.Row(this.gameBoard.getAllFieldsOfARow(i));
+        }
         var string = "";
         for (var i = 0; i < this.gameBoard.board.length; i++) {
             string = string + (String(this.gameBoard.board[i].x)) + "/" + (String(this.gameBoard.board[i].y)) + "/" + (String(this.gameBoard.board[i].value)) + "   ";
