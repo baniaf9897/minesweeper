@@ -1,8 +1,8 @@
 <h1 class="bg.secondary p-a-1">hello minesweeper</h1>
 <input type="submit" (click)="startGame()"/>
 
-<ul>
-    <li *ngFor="let item of gameBoard.board; let i = index ">
-        {{item.value}} X: {{item.x}}  Y:{{item.y}}
+<ul *ngFor="let row of rows; let i = index ">
+    <li *ngFor="let tile of row " >
+    {{tile.value}}    
     </li>
 </ul>
